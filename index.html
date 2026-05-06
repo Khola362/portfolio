@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Khola Raouf — Software Developer & CS Undergraduate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0a0a0f;
+  --ink2:#13131a;
+  --ink3:#1c1c26;
+  --line:#1e1e2a;
+  --text:#ededf0;
+  --text2:#9898a8;
+  --text3:#5a5a6e;
+  --accent:#c8a96e;
+  --accent2:#8b6f3e;
+  --green:#5ec893;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --r:6px;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
+::selection{background:var(--accent);color:var(--ink)}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:999;opacity:.5;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  background:rgba(10,10,15,0.88);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:17px;color:var(--text);
+  text-decoration:none;letter-spacing:0.01em;
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;list-style:none;gap:2px}
+.nav-links a{
+  padding:6px 13px;font-size:12.5px;font-weight:400;
+  color:var(--text3);text-decoration:none;letter-spacing:0.04em;
+  transition:color .2s;border-radius:4px;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.nav-cv{
+  padding:7px 18px;font-size:12px;font-weight:500;
+  border:1px solid var(--line);border-radius:20px;
+  color:var(--text3);text-decoration:none;
+  transition:all .2s;letter-spacing:0.05em;
+}
+.nav-cv:hover{border-color:#3a3a50;color:var(--text)}
+.nav-cta{
+  padding:8px 20px;font-size:12.5px;font-weight:500;
+  background:var(--accent);color:var(--ink);
+  border-radius:20px;text-decoration:none;letter-spacing:0.03em;
+  transition:background .2s;
+}
+.nav-cta:hover{background:#d9bb80}
+
+/* ── HERO ── */
+#home{
+  min-height:100vh;padding-top:60px;
+  display:grid;grid-template-columns:1fr 420px;
+  align-items:center;gap:64px;
+  max-width:1200px;margin:0 auto;
+  padding-left:64px;padding-right:64px;
+}
+.hero-inner{max-width:600px}
+
+/* ── HERO PHOTO ── */
+.hero-photo-col{
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 0;
+}
+.hero-photo-wrap{
+  position:relative;width:340px;
+}
+/* decorative border frame */
+.hero-photo-wrap::before{
+  content:'';
+  position:absolute;
+  top:-16px;right:-16px;
+  width:100%;height:100%;
+  border:1px solid var(--accent2);
+  border-radius:4px;
+  opacity:.4;
+  z-index:0;
+}
+.hero-photo-wrap::after{
+  content:'';
+  position:absolute;
+  bottom:-14px;left:-14px;
+  width:60px;height:60px;
+  border-left:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+  opacity:.6;
+  z-index:0;
+}
+.hero-photo{
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:4px;
+  display:block;
+  position:relative;z-index:1;
+  filter:grayscale(20%) contrast(1.05);
+  border:1px solid var(--line);
+}
+.hero-photo-badge{
+  position:absolute;
+  bottom:-20px;left:20px;
+  z-index:2;
+  background:var(--ink2);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:10px 16px;
+  display:flex;align-items:center;gap:10px;
+}
+.hpb-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  flex-shrink:0;
+}
+.hpb-text{font-size:11px;color:var(--text2);font-weight:400;line-height:1.4}
+.hpb-text strong{color:var(--text);display:block;font-weight:500;font-size:12px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:40px;
+}
+.hero-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+
+.hero-name{
+  font-family:var(--serif);
+  font-size:clamp(54px,7vw,96px);
+  line-height:1;letter-spacing:-0.02em;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.hero-name em{font-style:italic;color:var(--accent)}
+
+.hero-role{
+  font-size:15px;font-weight:300;color:var(--text3);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:36px;
+  border-left:2px solid var(--accent);padding-left:16px;
+}
+
+.hero-desc{
+  font-size:16px;line-height:1.85;color:var(--text2);
+  max-width:580px;margin-bottom:44px;font-weight:300;
+}
+.hero-desc strong{color:var(--text);font-weight:500}
+
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 28px;background:var(--accent);color:var(--ink);
+  font-size:13.5px;font-weight:600;border-radius:4px;
+  text-decoration:none;letter-spacing:0.03em;transition:background .2s;
+}
+.btn-primary:hover{background:#d9bb80}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 28px;background:transparent;
+  border:1px solid #2a2a3a;color:var(--text2);
+  font-size:13.5px;font-weight:400;border-radius:4px;
+  text-decoration:none;transition:all .2s;
+}
+.btn-outline:hover{border-color:#444460;color:var(--text)}
+
+/* ── DIVIDER ── */
+.divider{
+  max-width:1200px;margin:0 auto;padding:0 64px;
+}
+.divider hr{border:none;border-top:1px solid var(--line)}
+
+/* ── SECTION WRAP ── */
+.sw{max-width:1200px;margin:0 auto;padding:100px 64px}
+
+/* ── SECTION HEADER ── */
+.sh{margin-bottom:64px}
+.sh-num{
+  font-size:10px;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:12px;display:flex;align-items:center;gap:10px;
+}
+.sh-num::after{content:'';flex:1;height:1px;background:var(--line);max-width:48px}
+.sh-title{
+  font-family:var(--serif);
+  font-size:clamp(34px,4vw,52px);
+  line-height:1.08;letter-spacing:-0.02em;color:var(--text);
+}
+.sh-title em{color:var(--accent);font-style:italic}
+.sh-sub{margin-top:14px;font-size:15px;color:var(--text2);font-weight:300;max-width:520px;line-height:1.75}
+
+/* ── ABOUT ── */
+#about{border-top:1px solid var(--line)}
+.about-cols{display:grid;grid-template-columns:1fr 300px;gap:80px}
+.about-body p{font-size:15px;color:var(--text2);line-height:1.9;margin-bottom:16px;font-weight:300}
+.about-body p strong{color:var(--text);font-weight:500}
+
+.sidebar-block{margin-bottom:32px}
+.sb-label{
+  font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:14px;
+}
+.pill-row{display:flex;flex-wrap:wrap;gap:7px}
+.pill{
+  padding:5px 14px;font-size:12.5px;
+  border:1px solid var(--line);border-radius:3px;
+  color:var(--text3);font-weight:300;
+}
+.lang-item{
+  display:flex;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;
+}
+.lang-item:last-child{border-bottom:none}
+.li-name{color:var(--text)}
+.li-lvl{color:var(--text3);font-size:12px}
+.status-box{
+  background:var(--ink2);border:1px solid var(--line);
+  border-radius:var(--r);padding:18px;
+}
+.status-dot{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.s-dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.s-tag{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green)}
+.status-text{font-size:13px;color:var(--text2);line-height:1.7;font-weight:300}
+
+/* ── EXPERIENCE ── */
+#experience{border-top:1px solid var(--line)}
+.exp-list{margin-top:0}
+.exp-entry{
+  display:grid;grid-template-columns:220px 1fr;
+  gap:56px;padding:52px 0;
+  border-bottom:1px solid var(--line);
+}
+.exp-entry:first-child{border-top:1px solid var(--line)}
+.exp-meta{}
+.exp-period{font-size:12px;color:var(--text3);line-height:1.8;margin-bottom:12px}
+.exp-type{
+  display:inline-block;
+  padding:3px 12px;font-size:10.5px;font-weight:500;letter-spacing:0.08em;
+  border-radius:3px;
+}
+.type-intern{background:rgba(200,169,110,0.1);color:var(--accent);border:1px solid rgba(200,169,110,0.25)}
+.type-full{background:rgba(94,200,147,0.08);color:var(--green);border:1px solid rgba(94,200,147,0.2)}
+.exp-body{}
+.exp-title{
+  font-family:var(--serif);font-size:22px;
+  color:var(--text);margin-bottom:3px;line-height:1.2;
+}
+.exp-org{font-size:12.5px;color:var(--text3);margin-bottom:20px;letter-spacing:0.04em}
+.exp-points{list-style:none;margin-bottom:22px}
+.exp-points li{
+  font-size:14px;color:var(--text2);line-height:1.75;
+  padding-left:22px;position:relative;margin-bottom:9px;font-weight:300;
+}
+.exp-points li::before{
+  content:'';position:absolute;left:0;top:10px;
+  width:8px;height:1px;background:var(--accent2);
+}
+.exp-techs{display:flex;flex-wrap:wrap;gap:6px}
+.tech-tag{
+  padding:3px 11px;font-size:11px;
+  border:1px solid var(--line);border-radius:3px;
+  color:var(--text3);letter-spacing:0.03em;
+}
+
+/* ── PROJECTS ── */
+#projects{border-top:1px solid var(--line)}
+.pf-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:44px}
+.pf{
+  padding:6px 18px;font-size:12px;font-weight:400;
+  border:1px solid var(--line);border-radius:3px;
+  color:var(--text3);background:transparent;cursor:pointer;
+  transition:all .18s;letter-spacing:0.04em;
+}
+.pf:hover{border-color:#3a3a50;color:var(--text2)}
+.pf.on{background:var(--accent);color:var(--ink);border-color:var(--accent);font-weight:600}
+
+.pgrid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;
+  background:var(--line);gap:1px;
+}
+.pc{
+  background:var(--ink);padding:30px 26px;
+  position:relative;transition:background .2s;cursor:default;
+}
+.pc:hover{background:var(--ink2)}
+.pc-num{font-size:10px;color:#2a2a3a;letter-spacing:0.1em;margin-bottom:14px;font-family:monospace}
+.pc-cat{
+  font-size:9.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--accent2);margin-bottom:6px;
+}
+.pc-title{
+  font-family:var(--serif);font-size:16px;color:var(--text);
+  margin-bottom:8px;line-height:1.3;
+}
+.pc-desc{font-size:12.5px;color:var(--text3);line-height:1.75;margin-bottom:18px;font-weight:300}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.pc-tag{
+  padding:2px 9px;font-size:10px;
+  border:1px solid var(--line);border-radius:3px;
+  color:var(--text3);
+}
+.pc-empty{
+  background:var(--ink2);display:flex;align-items:center;
+  justify-content:center;min-height:180px;
+  color:#2a2a3a;font-size:11px;letter-spacing:0.1em;
+  font-style:italic;
+}
+
+/* ── TOOLKIT ── */
+#toolkit{border-top:1px solid var(--line)}
+.tk-cats{display:flex;flex-direction:column;gap:40px}
+.tcat{}
+.tcat-name{
+  font-size:10px;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--text3);
+  padding-bottom:14px;border-bottom:1px solid var(--line);
+  margin-bottom:18px;
+}
+.tk-items{display:flex;flex-wrap:wrap;gap:8px}
+.titem{
+  display:flex;align-items:center;gap:11px;
+  padding:12px 18px;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--ink2);transition:border-color .2s;
+}
+.titem:hover{border-color:#2e2e44}
+.ticon{font-size:16px;flex-shrink:0}
+.tname{font-size:13.5px;color:var(--text);font-weight:400}
+
+/* ── EDU + CERTS ── */
+.ec-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:0}
+.ec-head{
+  font-size:10px;font-weight:600;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--text3);
+  padding-bottom:14px;border-bottom:1px solid var(--line);
+  margin-bottom:18px;
+}
+.edu-card{
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:22px;background:var(--ink2);margin-bottom:12px;
+  transition:border-color .2s;
+}
+.edu-card:hover{border-color:#2e2e44}
+.edu-yr{font-size:11px;color:var(--text3);margin-bottom:5px}
+.edu-school{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:3px}
+.edu-deg{font-size:13px;color:var(--text2);margin-bottom:10px;font-weight:300}
+.edu-gpa{
+  display:inline-block;padding:3px 12px;font-size:11px;
+  border-radius:3px;background:rgba(94,200,147,0.07);
+  color:var(--green);border:1px solid rgba(94,200,147,0.2);
+}
+.cert-card{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--ink2);margin-bottom:10px;transition:border-color .2s;
+}
+.cert-card:hover{border-color:#2e2e44}
+.cert-name{font-size:13.5px;color:var(--text);font-weight:500;margin-bottom:2px}
+.cert-iss{font-size:11.5px;color:var(--text3);font-weight:300}
+.cert-badge{
+  padding:3px 11px;font-size:10px;font-weight:500;
+  border-radius:3px;border:1px solid rgba(200,169,110,0.25);
+  color:var(--accent);flex-shrink:0;letter-spacing:0.04em;
+}
+
+/* ── CONTACT ── */
+#contact{border-top:1px solid var(--line)}
+.ct-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.ct-links{display:flex;flex-direction:column;gap:8px}
+.ct-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--ink2);text-decoration:none;transition:border-color .2s;
+}
+.ct-row:hover{border-color:#2e2e44}
+.ct-row-l{display:flex;align-items:center;gap:14px}
+.ct-ico{
+  width:34px;height:34px;
+  background:var(--ink3);border:1px solid var(--line);
+  border-radius:5px;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0;
+}
+.ct-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
+.ct-val{font-size:13px;color:var(--text)}
+.ct-arr{color:var(--text3);font-size:13px;transition:all .2s}
+.ct-row:hover .ct-arr{color:var(--accent);transform:translate(3px,-3px)}
+
+.ct-form{display:flex;flex-direction:column;gap:14px}
+.cf-row{display:flex;gap:14px}
+.cfg{flex:1}
+.cf-lbl{display:block;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.cf-in,.cf-ta{
+  width:100%;background:var(--ink2);
+  border:1px solid var(--line);padding:12px 16px;
+  font-family:var(--sans);font-size:14px;color:var(--text);
+  border-radius:var(--r);outline:none;transition:border-color .2s;font-weight:300;
+}
+.cf-in::placeholder,.cf-ta::placeholder{color:#2e2e44}
+.cf-in:focus,.cf-ta:focus{border-color:#3a3a55}
+.cf-ta{min-height:136px;resize:vertical}
+.cf-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px;background:var(--accent);color:var(--ink);
+  font-family:var(--sans);font-size:14px;font-weight:600;
+  border:none;border-radius:var(--r);cursor:pointer;
+  transition:background .2s;letter-spacing:0.03em;
+}
+.cf-btn:hover{background:#d9bb80}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--line);background:var(--ink2)}
+.ft{max-width:1200px;margin:0 auto;padding:72px 64px 52px}
+.ft-hl{
+  font-family:var(--serif);
+  font-size:clamp(32px,3.8vw,50px);
+  line-height:1.1;letter-spacing:-0.02em;color:var(--text);
+  margin-bottom:12px;
+}
+.ft-hl em{color:var(--accent);font-style:italic}
+.ft-email{font-size:14px;color:var(--text2);text-decoration:none;border-bottom:1px solid var(--text3);padding-bottom:2px;transition:color .2s}
+.ft-email:hover{color:var(--accent)}
+
+.ft-cols{display:grid;grid-template-columns:1fr 140px 140px;gap:48px;margin-top:56px}
+.ftc-h{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.ftc-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ftc-links a{font-size:13.5px;color:var(--text2);text-decoration:none;font-weight:300;transition:color .2s}
+.ftc-links a:hover{color:var(--text)}
+
+.fb{
+  border-top:1px solid var(--line);
+  max-width:1200px;margin:0 auto;
+  padding:18px 64px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.fb-copy{font-size:12px;color:var(--text3)}
+.fb-top{
+  font-size:11px;color:var(--text3);letter-spacing:0.1em;
+  text-transform:uppercase;text-decoration:none;transition:color .2s;
+}
+.fb-top:hover{color:var(--text)}
+
+/* ── ANIMS ── */
+.fu{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  #home{grid-template-columns:1fr;padding:80px 24px 60px;gap:40px}
+  .hero-photo-col{justify-content:flex-start}
+  .hero-photo-wrap{width:260px}
+  .sw{padding:72px 24px}
+  .about-cols,.ct-cols{grid-template-columns:1fr;gap:40px}
+  .exp-entry{grid-template-columns:1fr;gap:8px}
+  .pgrid{grid-template-columns:1fr}
+  .ec-cols{grid-template-columns:1fr;gap:32px}
+  .ft-cols{grid-template-columns:1fr;gap:28px}
+  .ft,.fb{padding-left:24px;padding-right:24px}
+  .cf-row{flex-direction:column}
+  .nav-r .nav-cv{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Khola <span>Raouf</span></a>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#toolkit">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <a href="asset/khola_raouf.pdf" download class="nav-cv">↓ Download CV</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <div class="hero-dot"></div>
+      Open to Internships &amp; Collaborations
+    </div>
+    <h1 class="hero-name">Khola<br><em>Raouf</em></h1>
+    <p class="hero-role">Software Developer &amp; CS Undergraduate</p>
+    <p class="hero-desc">
+      CS undergrad at <strong>UET Lahore</strong> with hands-on experience in
+      <strong>applied AI</strong>, software development, and embedded systems.
+      I write clean code, ship working software, and care deeply about the details.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View my work ↗</a>
+      <a href="#contact" class="btn-outline">Let's talk</a>
+    </div>
+  </div>
+
+  <div class="hero-photo-col">
+    <div class="hero-photo-wrap">
+      <img class="hero-photo" src="asset/hero_photo.png" alt="Khola Raouf"/>
+      <div class="hero-photo-badge">
+        <div class="hpb-dot"></div>
+        <div class="hpb-text">
+          <strong>Available now</strong>
+          UET Lahore · CGPA 3.57
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sw">
+    <div class="sh fu">
+      <div class="sh-num">01 — About</div>
+      <h2 class="sh-title">Who I am &amp;<br><em>what I care about.</em></h2>
+      <p class="sh-sub">A brief introduction to how I think and what I've been building.</p>
+    </div>
+    <div class="about-cols">
+      <div class="about-body fu">
+        <p>I'm a Computer Science undergraduate at the University of Engineering &amp; Technology, Lahore, with a CGPA of <strong>3.57 / 4.0</strong>. My work spans software development, generative AI tooling, and embedded systems — and the common thread is a commitment to building things that are both functional and maintainable.</p>
+        <p>Over the past year I've worked professionally on production-grade systems: a flour mill management platform, a retail mall system, an RFID-based attendance solution, and a Gen-AI assistant at Pakistan's National Center of Artificial Intelligence. Each project taught me something new about writing software that survives real use.</p>
+        <p>I care about <strong>readable code</strong>, <strong>ergonomic interfaces</strong>, and quietly removing friction wherever I find it. I'm looking for a team where I can keep learning and keep shipping.</p>
+      </div>
+      <div class="fu">
+        <div class="sidebar-block">
+          <div class="sb-label">Soft Skills</div>
+          <div class="pill-row">
+            <span class="pill">Leadership</span>
+            <span class="pill">Communication</span>
+            <span class="pill">Problem Solving</span>
+            <span class="pill">Teamwork</span>
+            <span class="pill">Time Management</span>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sb-label">Languages</div>
+          <div>
+            <div class="lang-item"><span class="li-name">English</span><span class="li-lvl">Conversational</span></div>
+            <div class="lang-item"><span class="li-name">Urdu</span><span class="li-lvl">Native</span></div>
+            <div class="lang-item"><span class="li-name">Punjabi</span><span class="li-lvl">Native</span></div>
+          </div>
+        </div>
+        <!-- <div class="sidebar-block">
+          <div class="sb-label">Current Status</div>
+          <div class="status-box">
+            <div class="status-dot"><div class="s-dot"></div><span class="s-tag">Available</span></div>
+            <p class="status-text">Studying at UET Lahore. Recent Gen-AI internship. Open to part-time and full-time roles starting immediately.</p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sw">
+    <div class="sh fu">
+      <div class="sh-num">02 — Experience</div>
+      <h2 class="sh-title">Where I've worked<br>&amp; <em>what I built there.</em></h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-entry fu">
+        <div class="exp-meta">
+          <div class="exp-period">Dec 2025 — Feb 2026<br>Lahore, Pakistan</div>
+          <span class="exp-type type-intern">Internship</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Generative AI Developer</div>
+          <div class="exp-org">National Center of Artificial Intelligence (NCAI)</div>
+          <ul class="exp-points">
+            <li>Helped design and build a Gen-AI assistant for automating internal workflows and improving user interaction quality.</li>
+            <li>Handled data preprocessing pipelines, prompt design, and iterative response optimisation to improve accuracy.</li>
+            <li>Integrated AI features into production-grade internal applications, measurably reducing manual workload.</li>
+          </ul>
+          <div class="exp-techs">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">LLMs</span>
+            <span class="tech-tag">Prompt Engineering</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">NumPy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-entry fu">
+        <div class="exp-meta">
+          <div class="exp-period">Jul 2024 — Sep 2025<br>Lahore, Pakistan</div>
+          <span class="exp-type type-full">Full-time</span>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Software Developer</div>
+          <div class="exp-org">Perfect Solutions</div>
+          <ul class="exp-points">
+            <li>Developed and maintained business-critical web applications using PHP, HTML, and CSS with MySQL backends.</li>
+            <li>Delivered the National Flour Mill management system and Fatima Mall retail system — both in active production use.</li>
+            <li>Built an internal mobile attendance application deployed across the organisation.</li>
+            <li>Contributed to R&amp;D in embedded systems — RFID card scanners and Wi-Fi wireless modules (ESP-based).</li>
+          </ul>
+          <div class="exp-techs">
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">HTML / CSS</span>
+            <span class="tech-tag">RFID</span>
+            <span class="tech-tag">ESP / IoT</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sw">
+    <div class="sh fu">
+      <div class="sh-num">03 — Selected Projects</div>
+      <h2 class="sh-title">Academic &amp; personal<br><em>work I'm proud of.</em></h2>
+      <p class="sh-sub">A mix of coursework projects and independent builds across different domains.</p>
+    </div>
+
+    <div class="pf-bar">
+      <button class="pf on" data-f="all">All</button>
+      <button class="pf" data-f="ai">AI / ML</button>
+      <button class="pf" data-f="web">Web</button>
+      <button class="pf" data-f="systems">Systems</button>
+      <button class="pf" data-f="embedded">Embedded</button>
+      <button class="pf" data-f="algorithms">Algorithms</button>
+      <button class="pf" data-f="data">Data</button>
+    </div>
+
+    <div class="pgrid" id="pg">
+      <div class="pc fu" data-c="ai">
+        <div class="pc-num">/ 01</div>
+        <div class="pc-cat">AI / ML</div>
+        <div class="pc-title">Air Quality Index Prediction</div>
+        <div class="pc-desc">ML pipeline ingesting pollutant and weather data to forecast AQI with explainable feature importance outputs.</div>
+        <div class="pc-tags"><span class="pc-tag">Python</span><span class="pc-tag">Pandas</span><span class="pc-tag">Scikit-learn</span></div>
+      </div>
+
+      <div class="pc fu" data-c="systems">
+        <div class="pc-num">/ 02</div>
+        <div class="pc-cat">Systems</div>
+        <div class="pc-title">MongoDB-style DBMS</div>
+        <div class="pc-desc">From-scratch document database with B-tree indexing, JSON storage, and a query interface modelled after the Mongo shell.</div>
+        <div class="pc-tags"><span class="pc-tag">C++</span><span class="pc-tag">DBMS</span><span class="pc-tag">Indexing</span></div>
+      </div>
+
+      <div class="pc fu" data-c="algorithms">
+        <div class="pc-num">/ 03</div>
+        <div class="pc-cat">Algorithms</div>
+        <div class="pc-title">Orange Line Routing Engine</div>
+        <div class="pc-desc">Shortest-path engine for Lahore's Orange Line metro using Dijkstra's algorithm over a weighted station graph.</div>
+        <div class="pc-tags"><span class="pc-tag">C++</span><span class="pc-tag">Graph Theory</span><span class="pc-tag">Dijkstra</span></div>
+      </div>
+
+      <div class="pc fu" data-c="data">
+        <div class="pc-num">/ 04</div>
+        <div class="pc-cat">Data</div>
+        <div class="pc-title">Web Scraping Pipeline</div>
+        <div class="pc-desc">Multi-source scraper with deduplication and pluggable sort/filter pipelines — exports clean CSV and JSON datasets.</div>
+        <div class="pc-tags"><span class="pc-tag">Python</span><span class="pc-tag">BeautifulSoup</span><span class="pc-tag">Pandas</span></div>
+      </div>
+
+      <div class="pc fu" data-c="embedded">
+        <div class="pc-num">/ 05</div>
+        <div class="pc-cat">Embedded / IoT</div>
+        <div class="pc-title">Home Automation System</div>
+        <div class="pc-desc">Wi-Fi controlled relay-based automation for household appliances with a lightweight local web dashboard.</div>
+        <div class="pc-tags"><span class="pc-tag">ESP8266</span><span class="pc-tag">IoT</span><span class="pc-tag">HTML/CSS</span></div>
+      </div>
+
+      <div class="pc fu" data-c="web">
+        <div class="pc-num">/ 06</div>
+        <div class="pc-cat">Web</div>
+        <div class="pc-title">Cinema Management System</div>
+        <div class="pc-desc">End-to-end booking, seat-map, and showtime CRUD application with separate admin and customer role views.</div>
+        <div class="pc-tags"><span class="pc-tag">PHP</span><span class="pc-tag">MySQL</span><span class="pc-tag">HTML/CSS</span></div>
+      </div>
+
+      <div class="pc fu" data-c="web">
+        <div class="pc-num">/ 07</div>
+        <div class="pc-cat">Web</div>
+        <div class="pc-title">Employee Performance Tracker</div>
+        <div class="pc-desc">KPI tracking system with weighted scoring, monthly report generation, and exportable performance reviews.</div>
+        <div class="pc-tags"><span class="pc-tag">PHP</span><span class="pc-tag">SQL</span><span class="pc-tag">Charts</span></div>
+      </div>
+
+      <div class="pc fu" data-c="systems">
+        <div class="pc-num">/ 08</div>
+        <div class="pc-cat">Systems</div>
+        <div class="pc-title">File Manager Clone</div>
+        <div class="pc-desc">Cross-folder file manager with tree navigation, copy / move / rename, and search — built from OS primitives in C++.</div>
+        <div class="pc-tags"><span class="pc-tag">C++</span><span class="pc-tag">File Systems</span><span class="pc-tag">OOP</span></div>
+      </div>
+
+      <div class="pc pc-empty">more in progress —</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKIT -->
+<section id="toolkit">
+  <div class="sw">
+    <div class="sh fu">
+      <div class="sh-num">04 — Skills &amp; Toolkit</div>
+      <h2 class="sh-title">Technologies I work<br><em>with regularly.</em></h2>
+    </div>
+
+    <div class="tk-cats">
+      <div class="tcat fu">
+        <div class="tcat-name">Languages</div>
+        <div class="tk-items">
+          <div class="titem"><span class="ticon">🐍</span><span class="tname">Python</span></div>
+          <div class="titem"><span class="ticon">⚙️</span><span class="tname">C++</span></div>
+          <div class="titem"><span class="ticon">🐘</span><span class="tname">PHP</span></div>
+          <div class="titem"><span class="ticon">🗄️</span><span class="tname">SQL</span></div>
+          <div class="titem"><span class="ticon">🌐</span><span class="tname">HTML / CSS</span></div>
+        </div>
+      </div>
+
+      <div class="tcat fu">
+        <div class="tcat-name">AI &amp; Data</div>
+        <div class="tk-items">
+          <div class="titem"><span class="ticon">🤖</span><span class="tname">Scikit-learn</span></div>
+          <div class="titem"><span class="ticon">🐼</span><span class="tname">Pandas</span></div>
+          <div class="titem"><span class="ticon">🔢</span><span class="tname">NumPy</span></div>
+          <div class="titem"><span class="ticon">✨</span><span class="tname">Prompt Engineering</span></div>
+          <div class="titem"><span class="ticon">🔍</span><span class="tname">BeautifulSoup</span></div>
+        </div>
+      </div>
+
+      <div class="tcat fu">
+        <div class="tcat-name">Databases</div>
+        <div class="tk-items">
+          <div class="titem"><span class="ticon">🐬</span><span class="tname">MySQL</span></div>
+          <div class="titem"><span class="ticon">🍃</span><span class="tname">MongoDB</span></div>
+        </div>
+      </div>
+
+      <div class="tcat fu">
+        <div class="tcat-name">Embedded &amp; IoT</div>
+        <div class="tk-items">
+          <div class="titem"><span class="ticon">📡</span><span class="tname">RFID</span></div>
+          <div class="titem"><span class="ticon">📶</span><span class="tname">ESP8266 / ESP32</span></div>
+          <div class="titem"><span class="ticon">🔌</span><span class="tname">Relay Modules</span></div>
+        </div>
+      </div>
+
+      <div class="tcat fu">
+        <div class="tcat-name">Tools &amp; Workflow</div>
+        <div class="tk-items">
+          <div class="titem"><span class="ticon">🔧</span><span class="tname">Git</span></div>
+          <div class="titem"><span class="ticon">💻</span><span class="tname">VS Code</span></div>
+          <div class="titem"><span class="ticon">🔗</span><span class="tname">REST APIs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION + CERTS -->
+    <div style="margin-top:80px">
+      <div class="sh fu" style="margin-bottom:40px">
+        <div class="sh-num">05 — Education &amp; Certifications</div>
+        <h2 class="sh-title">Academic background<br>&amp; <em>verified credentials.</em></h2>
+      </div>
+      <div class="ec-cols">
+        <div class="fu">
+          <div class="ec-head">Education</div>
+          <div class="edu-card">
+            <div class="edu-yr">2023 — Present</div>
+            <div class="edu-school">University of Engineering &amp; Technology, Lahore</div>
+            <div class="edu-deg">BSc Computer Science</div>
+            <div class="edu-gpa">CGPA 3.57 / 4.0</div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-yr">2021 — 2023</div>
+            <div class="edu-school">Punjab College, Lahore</div>
+            <div class="edu-deg">Intermediate — Pre-Engineering</div>
+          </div>
+        </div>
+        <div class="fu">
+          <div class="ec-head">Certifications</div>
+          <div class="cert-card">
+            <div><div class="cert-name">SQL Certification</div><div class="cert-iss">HackerRank</div></div>
+            <span class="cert-badge">Verified</span>
+          </div>
+          <div class="cert-card">
+            <div><div class="cert-name">MongoDB Certification</div><div class="cert-iss">HackerRank</div></div>
+            <span class="cert-badge">Verified</span>
+          </div>
+          <div class="cert-card">
+            <div><div class="cert-name">Generative AI</div><div class="cert-iss">Google</div></div>
+            <span class="cert-badge">Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sw">
+    <div class="sh fu">
+      <div class="sh-num">06 — Contact</div>
+      <h2 class="sh-title">Have a project or role?<br><em>Let's talk.</em></h2>
+      <p class="sh-sub">I'm available for internships, part-time roles, and collaborative projects. Reach out directly or use the form below.</p>
+    </div>
+    <div class="ct-cols">
+      <div class="ct-links fu">
+        <a href="mailto:abdulrapufbint@gmail.com" class="ct-row">
+          <div class="ct-row-l">
+            <div class="ct-ico">✉</div>
+            <div><div class="ct-label">Email</div><div class="ct-val">abdulrapufbint@gmail.com</div></div>
+          </div>
+          <div class="ct-arr">↗</div>
+        </a>
+        <a href="tel:03287754168" class="ct-row">
+          <div class="ct-row-l">
+            <div class="ct-ico">☎</div>
+            <div><div class="ct-label">Phone</div><div class="ct-val">03287754168</div></div>
+          </div>
+          <div class="ct-arr">↗</div>
+        </a>
+        <div class="ct-row" style="cursor:default">
+          <div class="ct-row-l">
+            <div class="ct-ico">📍</div>
+            <div><div class="ct-label">Location</div><div class="ct-val">UET Lahore — Main Campus</div></div>
+          </div>
+        </div>
+        <a href="https://github.com/kholaraouf" target="_blank" class="ct-row">
+          <div class="ct-row-l">
+            <div class="ct-ico" style="font-size:12px;font-weight:700">GH</div>
+            <div><div class="ct-label">GitHub</div><div class="ct-val">github.com/kholaraouf</div></div>
+          </div>
+          <div class="ct-arr">↗</div>
+        </a>
+        <a href="www.linkedin.com/in/khola-raouf-a307b1291" target="_blank" class="ct-row">
+          <div class="ct-row-l">
+            <div class="ct-ico" style="font-size:12px;font-weight:700;font-family:serif">in</div>
+            <div><div class="ct-label">LinkedIn</div><div class="ct-val">www.linkedin.com/in/khola-raouf-a307b1291</div></div>
+          </div>
+          <div class="ct-arr">↗</div>
+        </a>
+      </div>
+
+      <div class="ct-form fu">
+        <div class="cf-row">
+          <div class="cfg"><label class="cf-lbl">Name</label><input type="text" class="cf-in" placeholder="Your name"/></div>
+          <div class="cfg"><label class="cf-lbl">Email</label><input type="email" class="cf-in" placeholder="your@email.com"/></div>
+        </div>
+        <div><label class="cf-lbl">Message</label><textarea class="cf-ta" placeholder="Tell me about the role or project…"></textarea></div>
+        <button class="cf-btn" onclick="send(this)">Send message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="sh-num" style="margin-bottom:20px">Currently available</div>
+    <h2 class="ft-hl">Open to roles in <em>applied AI</em>,<br>software development &amp; <em>embedded systems.</em></h2>
+    <div style="margin-top:16px"><a href="mailto:abdulrapufbint@gmail.com" class="ft-email">abdulrapufbint@gmail.com</a></div>
+    <div class="ft-cols">
+      <div></div>
+      <div>
+        <div class="ftc-h">Elsewhere</div>
+        <ul class="ftc-links">
+          <li><a href="https://github.com/kholaraouf" target="_blank">GitHub ↗</a></li>
+          <li><a href="www.linkedin.com/in/khola-raouf-a307b1291" target="_blank">LinkedIn ↗</a></li>
+          <li><a href="mailto:abdulrapufbint@gmail.com">Email ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ftc-h">Navigation</div>
+        <ul class="ftc-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="fb">
+    <span class="fb-copy">© 2026 Khola Raouf. All rights reserved.</span>
+    <a href="#home" class="fb-top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+// Fade-in observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+}, { threshold: 0.07 });
+document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+// Stagger toolkit items
+document.querySelectorAll('.titem').forEach((el,i) => {
+  el.style.transitionDelay = `${(i % 5) * 45}ms`;
+});
+
+// Nav active on scroll
+const secs = document.querySelectorAll('section[id]');
+const nls = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 100) cur = s.id });
+  nls.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
+}, { passive: true });
+
+// Project filter
+document.querySelectorAll('.pf').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const f = btn.dataset.f;
+    document.querySelectorAll('.pc[data-c]').forEach(card => {
+      card.style.display = (f === 'all' || card.dataset.c === f) ? '' : 'none';
+    });
+  });
+});
+
+// Contact form
+function send(btn) {
+  const orig = btn.textContent;
+  btn.textContent = '✓ Sent successfully';
+  btn.style.background = 'var(--green)';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+}
+</script>
+</body>
+</html>
